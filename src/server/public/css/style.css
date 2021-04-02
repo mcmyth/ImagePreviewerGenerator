@@ -1,0 +1,25 @@
+body {
+    padding: 30px;
+}
+#container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#container .item {
+    position: relative;
+    text-align: center;
+}
+#container .item .filename {
+    flex: 0 0 50%;
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    top: calc(100% - 35px);
+    background-color: black;
+    color: white;
+    font-size: 50px;
+}

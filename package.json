@@ -1,0 +1,16 @@
+{
+  "name": "ImagePreviewerGenerator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "MC Myth",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/main.js",
+    "debug": "nodemon src/main.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
+    "puppeteer": "^8.0.0"
+  }
+}
