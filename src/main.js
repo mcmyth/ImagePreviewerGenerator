@@ -20,6 +20,7 @@ const getFileCount = () => {
   const itemCount = 2   // 列数,修改itemCount是需同server/public/js/script.js中的itemCount常量一起修改
   const pageCount = fileCount / itemCount
 
+  const pageCount = Math.floor(fileCount / itemCount)
   const browser = await puppeteer.launch({
     headless: true,
   });
