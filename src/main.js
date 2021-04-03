@@ -4,7 +4,7 @@ const puppeteer = require('puppeteer');
 
 const getFileCount = () => {
   return new Promise(resolve => {
-    const dir = './src/server/public/image';
+    const dir = './image';
     fs.readdir(dir, (err, files) => {
       resolve(files.length);
     });

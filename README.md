@@ -12,7 +12,7 @@
 
 * 在`main.js`配置相关细则
 
-* 在`server/public/image/`中放入图像文件
+* 在`image/`中放入图像文件
 * 运行命令`yarn start`
 
 * 在`output/`中获取输出图像
