@@ -1,7 +1,6 @@
 const server = require('./server')
 const fs = require('fs');
 const puppeteer = require('puppeteer');
-
 const getFileCount = () => {
   return new Promise(resolve => {
     const dir = './image';
@@ -13,14 +12,15 @@ const getFileCount = () => {
 
 (async () => {
   // 主要配置项
-  let pageWidth = 1080
-  const fileCount = await getFileCount();
-  const port = 3000
+  let pageWidth = 1080; // 页面宽度
+  const port = 3000; // Express服务端监听端口
   const instance = server.app.listen(port);
-  const itemCount = 2   // 列数,修改itemCount是需同server/public/js/script.js中的itemCount常量一起修改
-  const pageCount = fileCount / itemCount
+  const itemCount = 2; //单页图像总数
+  const column = 1; // 单页图像列数
+  const fontSize = '50px'; //文件名标签字体大小
 
-  const pageCount = Math.floor(fileCount / itemCount)
+  const fileCount = await getFileCount();
+  const pageCount = Math.ceil(fileCount / itemCount)
   const browser = await puppeteer.launch({
     headless: true,
   });
@@ -28,7 +28,7 @@ const getFileCount = () => {
     const page = await browser.newPage();
     const pageNumber = i + 1;
     console.log(`${pageNumber}/${pageCount}`)
-    const url = `http://localhost:${port}/?p=${pageNumber}`;
+    const url = `http://localhost:${port}/?p=${pageNumber}&itemCount=${itemCount}&column=${column}&fontSize=${fontSize}`;
     try {
       await page.goto(url, {'waitUntil': 'networkidle2'});
     } catch (err) {

@@ -16,10 +16,8 @@ body {
     display: block;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     padding: 5px 10px;
-    top: calc(100% - 35px);
     background-color: black;
     color: white;
-    font-size: 50px;
 }

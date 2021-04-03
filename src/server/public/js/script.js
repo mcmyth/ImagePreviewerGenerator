@@ -1,8 +1,8 @@
-const itemCount = 2; //单页总数量
-const column = 1; // 列数,修改itemCount是需同main.js中的itemCount常量一起修改
+const itemCount = Number(getQueryVariable('itemCount'))
+const column = Number(getQueryVariable('column'))
 
 $(document).ready(async function () {
-  const files = await getFiles(getQueryVariable('p'))
+  const files = await getFiles(Number(getQueryVariable('p')))
   for (let i = 0; i < files.files.length; i++) {
     const e = document.getElementById('container')
     const marginTopBottom = 30
@@ -16,7 +16,11 @@ $(document).ready(async function () {
         flex: 0 0 calc(${100 / column}% - ${difference}px);
         ">
             <img src="image/${files.files[i]}">
-            <span class="filename">${files.files[i].substring(0, files.files[i].indexOf("."))}</span>
+            <span class="filename" style="
+            font-size: ${getQueryVariable('fontSize')};
+            top: calc(100% - ${getQueryVariable('fontSize') / 2}px);">
+                ${files.files[i].substring(0, files.files[i].indexOf("."))}
+            </span>
         </div>
         `
   }
@@ -29,7 +33,10 @@ const getFiles = (page) => {
       dataType: 'json',
       success: function (data) {
         if (page) {
-          data.files = data.files.slice(itemCount * (page - 1), itemCount * (page - 1) + itemCount)
+          const start = itemCount * (page - 1)
+          let end = itemCount * (page - 1) + itemCount
+          if (end > data.files.length) end = data.files.length
+          data.files = data.files.slice(start, end)
           resolve(data)
         } else {
           resolve(data)
