@@ -39,7 +39,7 @@ const getFileCount = () => {
       const containerHeight = await page.evaluate(() => {
         return document.body.offsetHeight
       })
-      await page.setViewport({width: Math.round(pageWidth), height: containerHeight + 100})
+      await page.setViewport({width: Math.round(pageWidth), height: containerHeight})
       if (!fs.existsSync('./output/')) fs.mkdirSync('./output/')
       await page.screenshot({path: './output/' + pageNumber + '.png'})
       await page.close()

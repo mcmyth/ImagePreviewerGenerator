@@ -5,7 +5,7 @@ $(document).ready(async function () {
   const files = await getFiles(Number(getQueryVariable('p')))
   for (let i = 0; i < files.files.length; i++) {
     const e = document.getElementById('container')
-    const marginTopBottom = 30
+    const marginTopBottom = Number(getQueryVariable('fontSize').replace(/[^\d.]/g, '')) / 2 + 15
     const marginLeftRight = 10
     const borderWidth = 1
     const difference = borderWidth * 4 + (marginTopBottom + marginLeftRight)
