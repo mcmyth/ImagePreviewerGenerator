@@ -1,11 +1,11 @@
 const express = require('express')
 const api = require('./api.js')
 const app = express()
-app.use(express.static(__dirname + '/public'));
-app.use('/image', express.static(__dirname + '../../../image'));
+app.use(express.static(__dirname + '/public'))
+app.use('/image', express.static(__dirname + '../../../image'))
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', function (req, res) {
-    res.send('hello world')
+  res.send('hello world')
 })
 app.use('/api', api)
 
