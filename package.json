@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node src/main.js",
-    "debug": "nodemon src/main.js"
+    "reset": "node src/reset.js",
+    "debug": "nodemon src/main.js debug"
   },
   "dependencies": {
     "express": "^4.17.1",

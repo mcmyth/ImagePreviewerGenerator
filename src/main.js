@@ -1,4 +1,5 @@
 const server = require('./server')
+const config = require('../config.js').config
 const fs = require('fs')
 const puppeteer = require('puppeteer')
 const getFileCount = () => {
@@ -11,16 +12,13 @@ const getFileCount = () => {
 }
 
 (async () => {
-  // 主要配置项
-  let pageWidth = 1080 // 页面宽度
-  const port = 3000 // Express服务端监听端口
-  const instance = server.app.listen(port)
-  const itemCount = 2 //单页图像总数
-  const column = 1 // 单页图像列数
-  const fontSize = '50px' //文件名标签字体大小
-
+  const instance = server.app.listen(config.port)
+  if (String(process.argv.splice(2)) === 'debug') {
+    console.log(`express running on:http://localhost:${config.port}\nfirst page:http://localhost:${config.port}/?p=1&itemCount=${config.itemCount}&column=${config.column}&fontSize=${config.fontSize}`)
+    return
+  }
   const fileCount = await getFileCount()
-  const pageCount = Math.ceil(fileCount / itemCount)
+  const pageCount = Math.ceil(fileCount / config.itemCount)
   const browser = await puppeteer.launch({
     headless: true,
   })
@@ -28,18 +26,18 @@ const getFileCount = () => {
     const page = await browser.newPage()
     const pageNumber = i + 1
     console.log(`${pageNumber}/${pageCount}`)
-    const url = `http://localhost:${port}/?p=${pageNumber}&itemCount=${itemCount}&column=${column}&fontSize=${fontSize}`
+    const url = `http://localhost:${config.port}/?p=${pageNumber}&itemCount=${config.itemCount}&column=${config.column}&fontSize=${config.fontSize}`
     try {
       await page.goto(url, {'waitUntil': 'networkidle2'})
     } catch (err) {
       await browser.close()
     }
-    await page.setViewport({width: Math.round(pageWidth), height: 100})
+    await page.setViewport({width: Math.round(config.pageWidth), height: 100})
     await setTimeout(async () => {
       const containerHeight = await page.evaluate(() => {
         return document.body.offsetHeight
       })
-      await page.setViewport({width: Math.round(pageWidth), height: containerHeight})
+      await page.setViewport({width: Math.round(config.pageWidth), height: containerHeight})
       if (!fs.existsSync('./output/')) fs.mkdirSync('./output/')
       await page.screenshot({path: './output/' + pageNumber + '.png'})
       await page.close()
