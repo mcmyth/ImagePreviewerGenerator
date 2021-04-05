@@ -6,6 +6,7 @@ $(document).ready(async function () {
   for (let i = 0; i < files.files.length; i++) {
     const e = document.getElementById('container')
     const marginTopBottom = Number(getQueryVariable('fontSize').replace(/[^\d.]/g, '')) / 2 + 15
+    e.style.paddingBottom =  marginTopBottom + 'px'
     const marginLeftRight = 10
     const borderWidth = 1
     const difference = borderWidth * 4 + (marginTopBottom + marginLeftRight)
