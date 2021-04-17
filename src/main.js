@@ -21,6 +21,7 @@ const getFileCount = () => {
   const pageCount = Math.ceil(fileCount / config.itemCount)
   const browser = await puppeteer.launch({
     headless: true,
+    timeout: 600000
   })
   for (let i = 0; i < pageCount; i++) {
     const page = await browser.newPage()
@@ -28,7 +29,7 @@ const getFileCount = () => {
     console.log(`${pageNumber}/${pageCount}`)
     const url = `http://localhost:${config.port}/?p=${pageNumber}&itemCount=${config.itemCount}&column=${config.column}&fontSize=${config.fontSize}`
     try {
-      await page.goto(url, {'waitUntil': 'networkidle2'})
+      await page.goto(url, {'waitUntil': 'networkidle2', timeout: 600000})
     } catch (err) {
       await browser.close()
     }
