@@ -13,13 +13,11 @@ $(document).ready(async function () {
     e.innerHTML += `
         <div class="item" style="
         margin: ${marginTopBottom}px ${marginLeftRight}px;
-        border: solid 1px black;
         flex: 0 0 calc(${100 / column}% - ${difference}px);
         ">
             <img src="image/${files.files[i]}">
             <span class="filename" style="
-            font-size: ${getQueryVariable('fontSize')};
-            top: calc(100% - ${getQueryVariable('fontSize') / 2}px);">
+            font-size: ${getQueryVariable('fontSize')};">
                 ${files.files[i].substring(0, files.files[i].indexOf("."))}
             </span>
         </div>

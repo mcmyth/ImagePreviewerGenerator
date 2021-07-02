@@ -2,12 +2,21 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    align-items: flex-end;
 }
 
 #container .item {
     position: relative;
     text-align: center;
 }
+#container .item img{
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+    border: solid 1px black;
+    margin: 0 auto;
+}
+
 #container .item .filename {
     flex: 0 0 50%;
     display: block;
