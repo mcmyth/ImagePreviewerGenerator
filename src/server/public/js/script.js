@@ -3,10 +3,10 @@ const column = Number(getQueryVariable('column'))
 
 $(document).ready(async function () {
   const files = await getFiles(Number(getQueryVariable('p')))
+  const e = document.getElementById('container')
   for (let i = 0; i < files.files.length; i++) {
-    const e = document.getElementById('container')
-    const marginTopBottom = Number(getQueryVariable('fontSize').replace(/[^\d.]/g, '')) / 2 + 15
-    e.style.paddingBottom =  marginTopBottom + 'px'
+    const marginTopBottom = Number(getQueryVariable('fontSize').replace(/[^\d.]/g, '')) / 2 + 5
+    e.style.padding = `0 25px ${marginTopBottom}px 25px`
     const marginLeftRight = 10
     const borderWidth = 1
     const difference = borderWidth * 4 + (marginTopBottom + marginLeftRight)
