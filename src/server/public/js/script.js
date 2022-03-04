@@ -16,8 +16,7 @@ $(document).ready(async function () {
         flex: 0 0 calc(${100 / column}% - ${difference}px);
         ">
             <img src="image/${files.files[i]}">
-            <span class="filename" style="
-            font-size: ${getQueryVariable('fontSize')};">
+            <span class="filename" style="font-size: ${getQueryVariable('fontSize')};">
                 ${files.files[i].substring(0, files.files[i].indexOf("."))}
             </span>
         </div>
