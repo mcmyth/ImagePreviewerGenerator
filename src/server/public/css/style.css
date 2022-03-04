@@ -16,26 +16,21 @@
     margin: 0 auto;
 }
 
-#container .item .filename {
-    flex: 0 0 50%;
-    display: block;
+.item::before,.item::after {
     position: absolute;
-    right: 23%;
-    bottom: 15px;
-    transform: translateX(50%);
     padding: 5px 10px;
     background-color: white;
     color: black;
 }
 
-#container .item .size {
-    flex: 0 0 50%;
-    display: block;
-    position: absolute;
-    left: 22%;
-    bottom: 15px;
-    transform: translateX(-50%);
-    padding: 5px 10px;
-    background-color: white;
-    color: black;
+.item::before{
+    content: attr(data-before);
+    left: 10px;
+    bottom: 10px;
+}
+
+.item::after{
+    content: attr(data-after);
+    right: 10px;
+    bottom: 10px;
 }

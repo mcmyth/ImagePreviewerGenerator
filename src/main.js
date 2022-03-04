@@ -48,6 +48,6 @@ const getFileCount = () => {
         await browser.close()
         instance.close()
       }
-    }, 200)
+    }, 300)
   }
 })()
