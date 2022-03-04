@@ -13,7 +13,6 @@
     max-height: 100%;
     max-width: 100%;
     display: block;
-    border: solid 1px black;
     margin: 0 auto;
 }
 
@@ -21,9 +20,22 @@
     flex: 0 0 50%;
     display: block;
     position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    right: 23%;
+    bottom: 15px;
+    transform: translateX(50%);
     padding: 5px 10px;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
+}
+
+#container .item .size {
+    flex: 0 0 50%;
+    display: block;
+    position: absolute;
+    left: 22%;
+    bottom: 15px;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background-color: white;
+    color: black;
 }

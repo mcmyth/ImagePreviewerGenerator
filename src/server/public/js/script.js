@@ -2,9 +2,10 @@ const itemCount = Number(getQueryVariable('itemCount'))
 const column = Number(getQueryVariable('column'))
 
 $(document).ready(async function () {
-  const files = await getFiles(Number(getQueryVariable('p')))
+  const files = await getFiles()
+  const p = getQueryVariable('p') - 1
   const e = document.getElementById('container')
-  for (let i = 0; i < files.files.length; i++) {
+  for (let i = 0; i < itemCount; i++) {
     const marginTopBottom = Number(getQueryVariable('fontSize').replace(/[^\d.]/g, '')) / 2 + 5
     e.style.padding = `0 25px ${marginTopBottom}px 25px`
     const marginLeftRight = 10
@@ -15,10 +16,10 @@ $(document).ready(async function () {
         margin: ${marginTopBottom}px ${marginLeftRight}px;
         flex: 0 0 calc(${100 / column}% - ${difference}px);
         ">
-            <img src="image/${files.files[i]}">
-            <span class="filename" style="
-            font-size: ${getQueryVariable('fontSize')};">
-                ${files.files[i].substring(0, files.files[i].indexOf("."))}
+            <img src="image/${files.files[p]}">
+            <span class="size" style="font-size: ${getQueryVariable('fontSize')};">${getQueryVariable('sizeLabel')}</span>
+            <span class="filename" style="font-size: ${getQueryVariable('fontSize')};">
+                ${files.files[p].substring(0, files.files[p].indexOf("."))}
             </span>
         </div>
         `
@@ -31,15 +32,7 @@ const getFiles = (page) => {
       url: "/api/files",
       dataType: 'json',
       success: function (data) {
-        if (page) {
-          const start = itemCount * (page - 1)
-          let end = itemCount * (page - 1) + itemCount
-          if (end > data.files.length) end = data.files.length
-          data.files = data.files.slice(start, end)
-          resolve(data)
-        } else {
-          resolve(data)
-        }
+        resolve(data)
       }
     })
   })

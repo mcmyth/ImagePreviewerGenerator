@@ -2,6 +2,8 @@ const server = require('./server')
 const config = require('../config.js').config
 const fs = require('fs')
 const puppeteer = require('puppeteer')
+const api = require('./server/api')
+const fileHelper = require('./FileHelper')
 const getFileCount = () => {
   return new Promise(resolve => {
     const dir = './image'
@@ -12,13 +14,13 @@ const getFileCount = () => {
 }
 
 (async () => {
+  const files = JSON.parse(String(await fileHelper.getFile('./image'))).files
   const instance = server.app.listen(config.port)
   if (String(process.argv.splice(2)) === 'debug') {
-    console.log(`express running on:http://localhost:${config.port}\nfirst page:http://localhost:${config.port}/?p=1&itemCount=${config.itemCount}&column=${config.column}&fontSize=${config.fontSize}`)
+    console.log(`express running on:http://localhost:${config.port}\nfirst page:http://localhost:${config.port}/?p=1&itemCount=${config.itemCount}&column=${config.column}&fontSize=${config.fontSize}&sizeLabel=${config.sizeLabel}`)
     return
   }
-  const fileCount = await getFileCount()
-  const pageCount = Math.ceil(fileCount / config.itemCount)
+  const pageCount = await getFileCount()
   const browser = await puppeteer.launch({
     headless: true,
     timeout: 600000
@@ -27,7 +29,7 @@ const getFileCount = () => {
     const page = await browser.newPage()
     const pageNumber = i + 1
     console.log(`${pageNumber}/${pageCount}`)
-    const url = `http://localhost:${config.port}/?p=${pageNumber}&itemCount=${config.itemCount}&column=${config.column}&fontSize=${config.fontSize}`
+    const url = `http://localhost:${config.port}/?p=${pageNumber}&itemCount=${config.itemCount}&column=${config.column}&fontSize=${config.fontSize}&sizeLabel=${config.sizeLabel}`
     try {
       await page.goto(url, {'waitUntil': 'networkidle2', timeout: 600000})
     } catch (err) {
@@ -40,7 +42,7 @@ const getFileCount = () => {
       })
       await page.setViewport({width: Math.round(config.pageWidth), height: containerHeight})
       if (!fs.existsSync('./output/')) fs.mkdirSync('./output/')
-      await page.screenshot({path: './output/' + pageNumber + '.png'})
+      await page.screenshot({path: `./output/${files[i].substring(0, files[i].indexOf("."))}.png`})
       await page.close()
       if (pageNumber === pageCount) {
         await browser.close()
