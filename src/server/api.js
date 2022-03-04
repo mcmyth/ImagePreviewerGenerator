@@ -3,7 +3,6 @@ const router = express.Router()
 const fs = require('fs')
 router.get('/files', async (req, res) => {
   const dir = './image'
-  fs.readdir(dir, (err, files) => {
     fs.readdir(dir, (err, files) => {
       const json = {
         files,
@@ -12,7 +11,6 @@ router.get('/files', async (req, res) => {
       json.files = bSort(json.files)
       res.send(JSON.stringify(json))
     });
-  });
 })
 
 function bSort(arr) {
