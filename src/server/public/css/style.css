@@ -15,21 +15,24 @@
     display: block;
     margin: 0 auto;
 }
-
-.item::before,.item::after {
+.img_container {
+    display: inline-block;
+    position: relative;
+}
+.item .img_container::before,.item .img_container::after {
     position: absolute;
     padding: 5px 10px;
     background-color: white;
     color: black;
 }
 
-.item::before{
+.item .img_container::before{
     content: attr(data-before);
     left: 10px;
     bottom: 10px;
 }
 
-.item::after{
+.item .img_container::after{
     content: attr(data-after);
     right: 10px;
     bottom: 10px;

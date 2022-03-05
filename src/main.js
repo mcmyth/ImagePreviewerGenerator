@@ -28,7 +28,6 @@ const getFileCount = () => {
   for (let i = 0; i < pageCount; i++) {
     const page = await browser.newPage()
     const pageNumber = i + 1
-    console.log(`${pageNumber}/${pageCount}`)
     const url = `http://localhost:${config.port}/?p=${pageNumber}&itemCount=${config.itemCount}&column=${config.column}&fontSize=${config.fontSize}&sizeLabel=${config.sizeLabel}`
     try {
       await page.goto(url, {'waitUntil': 'networkidle2', timeout: 600000})
@@ -49,5 +48,6 @@ const getFileCount = () => {
         instance.close()
       }
     }, 300)
+    console.log(`${pageNumber}/${pageCount}`)
   }
 })()
