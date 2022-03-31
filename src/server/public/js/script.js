@@ -8,12 +8,14 @@ $(document).ready(async function () {
   e.innerHTML = `<style>.img_container::before,.img_container::after {font-size: ${getQueryVariable('fontSize')}</style>`
   for (let i = 0; i < itemCount; i++) {
     const marginTopBottom = Number(getQueryVariable('fontSize').replace(/[^\d.]/g, '')) / 2 + 5
-    e.style.padding = `0 25px ${marginTopBottom}px 25px`
-    const marginLeftRight = 10
+    e.style.padding = `0`
+    const marginLeftRight = 50
+    const marginBottom = i+1 > Number(getQueryVariable('itemCount')) - Number(getQueryVariable('column')) ? 0 : marginLeftRight
+    const marginLeft = ((i+1) % Number(getQueryVariable('column'))) === 1 ? 0 : marginLeftRight
     const borderWidth = 1
     const difference = borderWidth * 4 + (marginTopBottom + marginLeftRight)
     e.innerHTML += `
-        <div class="item" style="margin: ${marginTopBottom}px ${marginLeftRight}px;flex: 0 0 calc(${100 / column}% - ${difference}px);">
+        <div class="item" style="margin-bottom: ${marginBottom}px; margin-left: ${marginLeft}px;flex: 0 0 calc(${100 / column}% - ${difference}px);">
         <span class="img_container"
         data-before="${getQueryVariable('sizeLabel')}"
         data-after="${files.files[p].substring(0, files.files[p].indexOf("."))}"

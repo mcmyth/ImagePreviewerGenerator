@@ -8,6 +8,7 @@
 #container .item {
     position: relative;
     text-align: center;
+    display: flex;
 }
 #container .item img{
     max-height: 100%;
