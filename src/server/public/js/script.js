@@ -9,7 +9,7 @@ $(document).ready(async function () {
   for (let i = 0; i < itemCount; i++) {
     const marginTopBottom = Number(getQueryVariable('fontSize').replace(/[^\d.]/g, '')) / 2 + 5
     e.style.padding = `0`
-    const marginLeftRight = 50
+    const marginLeftRight = 45
     const marginBottom = i+1 > Number(getQueryVariable('itemCount')) - Number(getQueryVariable('column')) ? 0 : marginLeftRight
     const marginLeft = ((i+1) % Number(getQueryVariable('column'))) === 1 ? 0 : marginLeftRight
     const borderWidth = 1

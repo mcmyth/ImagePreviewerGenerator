@@ -15,6 +15,7 @@
     max-width: 100%;
     display: block;
     margin: 0 auto;
+
 }
 .img_container {
     display: inline-block;
@@ -31,10 +32,12 @@
     content: attr(data-before);
     left: 10px;
     bottom: 10px;
+    display: none;
 }
 
 .item .img_container::after{
     content: attr(data-after);
-    right: 10px;
     bottom: 10px;
+    position: absolute;
+    transform: translateX(-50%);
 }
